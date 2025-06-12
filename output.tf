@@ -15,5 +15,5 @@ output "ssh_private_key_path" {
 
 output "kubeconfig_note" {
   description = "Access the K3s cluster by SSHing into the instance and using this path"
-  value       = "Run: ssh -i ~/.ssh/id_rsa ubuntu@${aws_instance.instance.public_ip} && sudo cat /etc/rancher/k3s/k3s.yaml"
+  value       = "Run: ssh -i ~/.ssh/id_rsa ubuntu@${aws_instance.instance.public_ip}"
 }
