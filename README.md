@@ -1,5 +1,5 @@
 
-![ec2archi](https://github.com/user-attachments/assets/122ef16c-3b44-441a-b924-2ea3b7e51190)
+![eksarchi](https://github.com/user-attachments/assets/85341846-7997-4a4b-9c67-5254563e36fc)
 
 
 ## Terraform Provisioner Model | Kubernetes  🚀🚀🚀
