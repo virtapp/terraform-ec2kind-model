@@ -87,9 +87,9 @@ resource "aws_instance" "instance" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo apt-get update -y && apt install zip -y",
-      "sudo wget https://releases.hashicorp.com/terraform/0.14.3/terraform_0.14.3_linux_amd64.zip",
-      "sudo unzip terraform_0.14.3_linux_amd64.zip && sudo mv terraform /usr/local/bin/",
+      "sudo apt-get update -y && apt install zip jq docker.io -y",
+      "sudo wget https://releases.hashicorp.com/terraform/0.14.3/terraform_0.14.8_linux_amd64.zip",
+      "sudo unzip terraform_0.14.8_linux_amd64.zip && sudo mv terraform /usr/local/bin/",
       "sudo sleep 5 && terraform version",
       "sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl",
       "sudo chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin/kubectl",
@@ -100,8 +100,44 @@ resource "aws_instance" "instance" {
   }
   provisioner "remote-exec" {
   inline = [
-    "sudo mkdir -p /root/.kube",
-    "sudo cp /etc/rancher/k3s/k3s.yaml /root/.kube/config"
+    "cat <<EOF | sudo tee -a /tmp/local-config.tf",
+    "provider "kind" {
+}
+
+provider "kubernetes" {
+  config_path = pathexpand(var.kind_cluster_config_path)
+}
+
+resource "kind_cluster" "default" {
+  name            = var.kind_cluster_name
+  kubeconfig_path = pathexpand(var.kind_cluster_config_path)
+  wait_for_ready  = true
+
+  kind_config {
+    kind        = "Cluster"
+    api_version = "kind.x-k8s.io/v1alpha4"
+
+    node {
+      role = "control-plane"
+      image = "kindest/node:v1.23.4"
+
+      kubeadm_config_patches = [
+        "kind: InitConfiguration\nnodeRegistration:\n  kubeletExtraArgs:\n    node-labels: \"ingress-ready=true\"\n"
+      ]
+      extra_port_mappings {
+        container_port = 80
+        host_port      = 80
+      }
+      extra_port_mappings {
+        container_port = 443
+        host_port      = 443
+      }
+    }
+
+  }
+}
+",
+    "EOF"
   ]
 }
   provisioner "remote-exec" {
