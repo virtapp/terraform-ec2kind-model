@@ -101,12 +101,12 @@ resource "aws_instance" "instance" {
   }
 
   provisioner "file" {
-   source      = "./local.tf"
+   source      = "./modules/kind/local.tf"
    destination = "/tmp/local.tf"
 }
 
   provisioner "file" {
-   source      = "./providers.tf"
+   source      = "./modules/kind/providers.tf"
    destination = "/tmp/providers.tf"
 }
 
