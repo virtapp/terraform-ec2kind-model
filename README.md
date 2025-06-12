@@ -1,4 +1,5 @@
-![Terraform_BlogImage](https://github.com/user-attachments/assets/ac8e5635-c116-41bb-8c99-7a693997f3cb)
+
+![ec2archi](https://github.com/user-attachments/assets/122ef16c-3b44-441a-b924-2ea3b7e51190)
 
 
 ## Terraform Provisioner  | Remote-Exec 🚀
