@@ -87,9 +87,12 @@ resource "aws_instance" "instance" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo apt-get update -y",
-      "sudo curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC='--disable traefik' sh -",
-      "sudo sleep 5 && systemctl status k3s | grep -v k3s 2>/dev/null",
+      "sudo apt-get update -y && apt install zip -y",
+      "sudo wget https://releases.hashicorp.com/terraform/0.14.3/terraform_0.14.3_linux_amd64.zip",
+      "sudo unzip terraform_0.14.3_linux_amd64.zip && sudo mv terraform /usr/local/bin/",
+      "sudo sleep 5 && terraform version",
+      "sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl",
+      "sudo chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin/kubectl",
       "sudo curl -# -LO https://get.helm.sh/helm-v3.5.3-linux-amd64.tar.gz && sudo tar -xzvf helm-v3.5.3-linux-amd64.tar.gz",
       "sudo mv linux-amd64/helm /usr/local/bin/helm",
       "sudo helm version"
