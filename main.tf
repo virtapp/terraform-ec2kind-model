@@ -100,8 +100,13 @@ resource "aws_instance" "instance" {
   }
 
   provisioner "file" {
-   source      = "./local.tf.tf"
-   destination = "/tmp/local.tf.tf"
+   source      = "./local.tf"
+   destination = "/tmp/local.tf"
+}
+
+  provisioner "file" {
+   source      = "./providers.tf"
+   destination = "/tmp/providers.tf"
 }
 
   provisioner "remote-exec" {
