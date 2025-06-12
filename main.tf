@@ -142,9 +142,9 @@ resource "kind_cluster" "default" {
 }
   provisioner "remote-exec" {
   inline = [
-    "sudo helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx",
-    "sudo helm repo update",
-    "sudo helm install ingress ingress-nginx/ingress-nginx --namespace ingress-nginx --create-namespace --set controller.extraArgs.update-status=\\\"false\\\""
+    "terraform init || exit 1",
+    "terraform validate || exit ",
+    "terraform plan && terraform apply -auto-approve"
   ]
 }
 
