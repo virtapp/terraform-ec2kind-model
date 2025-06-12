@@ -1,6 +1,4 @@
-
-![eksarchi](https://github.com/user-attachments/assets/85341846-7997-4a4b-9c67-5254563e36fc)
-
+![454622268-85341846-7997-4a4b-9c67-5254563e36fc](https://github.com/user-attachments/assets/cf54a003-2bc4-4c61-92aa-6a74a28682c5)
 
 ## Terraform Provisioner | Model  🚀🚀🚀
 
