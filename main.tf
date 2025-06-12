@@ -142,8 +142,7 @@ resource "kind_cluster" "default" {
 }
   provisioner "remote-exec" {
   inline = [
-    "terraform init || exit 1",
-    "terraform validate || exit ",
+    "terraform init && terraform validate",
     "terraform plan && terraform apply -auto-approve"
   ]
 }
