@@ -2,17 +2,17 @@
 ![eksarchi](https://github.com/user-attachments/assets/85341846-7997-4a4b-9c67-5254563e36fc)
 
 
-## Terraform Provisioner Model | Kubernetes  🚀🚀🚀
+## Terraform Provisioner | Model  🚀🚀🚀
 
 
 
 🎯  Key Features
 ```
 ✅ Deploy the Infrastructure
-✅ Launch the EC2 instances
-✅ Bootstrap the installation workflow
+✅ Launch the EC2 Instance
+✅ Install Dependencies
 ✅ Prepare Software Installation
-✅ Configure Server
+✅ Post-Configuration
 ```
 
 🚀 
