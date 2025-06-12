@@ -112,8 +112,8 @@ resource "aws_instance" "instance" {
 
   provisioner "remote-exec" {
   inline = [
-    "cd /tmp/ && terraform init",
-    "terraform plan && terraform apply -auto-approve"
+    "cd /tmp/ && sudo terraform init",
+    "sudo terraform plan && sudo terraform apply -auto-approve"
   ]
 }
 
