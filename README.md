@@ -2,7 +2,7 @@
 ![ec2archi](https://github.com/user-attachments/assets/122ef16c-3b44-441a-b924-2ea3b7e51190)
 
 
-## Terraform Provisioner  | Remote-Exec 🚀
+## Terraform Provisioner Model | Kubernetes  🚀🚀🚀
 
 
 
