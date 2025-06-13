@@ -104,16 +104,19 @@ resource "aws_instance" "instance" {
    source      = "./modules/kind/local.tf"
    destination = "/tmp/local.tf"
 }
-
+  provisioner "file" {
+   source      = "./modules/kind/resources.tf"
+   destination = "/tmp/resources.tf"
+}
   provisioner "file" {
    source      = "./modules/kind/providers.tf"
    destination = "/tmp/providers.tf"
 }
-
   provisioner "remote-exec" {
   inline = [
     "cd /tmp/ && sudo terraform init",
-    "sudo terraform plan && sudo terraform apply -auto-approve"
+    "sudo terraform plan && sudo terraform apply -auto-approve",
+    "sudo terraform state list && sleep 5"
   ]
 }
 
