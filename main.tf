@@ -88,7 +88,7 @@ resource "aws_instance" "instance" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo apt-get update -y && sudo apt install zip jq docker.io -y",
+      "sudo apt-get update -y && sudo apt-get install unzip jq docker.io -y",
       "sudo wget https://releases.hashicorp.com/terraform/0.14.8/terraform_0.14.8_linux_amd64.zip",
       "sudo unzip terraform_0.14.8_linux_amd64.zip && sudo mv terraform /usr/local/bin/",
       "sudo sleep 5 && terraform version",
