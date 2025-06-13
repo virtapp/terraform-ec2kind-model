@@ -50,7 +50,6 @@ resource "null_resource" "wait_for_metallb" {
         --timeout=90s
     EOF
   }
-
   depends_on = [helm_release.metallb]
 }
 
@@ -64,8 +63,29 @@ resource "helm_release" "ingress_nginx" {
   create_namespace = true
   timeout = 300
 
-  values = [file("config/nginx_values.yaml")]
-
+  values = [
+    <<EOT
+controller:
+  updateStrategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxUnavailable: 1
+  hostPort:
+    enabled: true
+  terminationGracePeriodSeconds: 0
+  service:
+    type: "LoadBalancer"
+  watchIngressWithoutClass: true
+  nodeSelector:
+    ingress-ready: "true"
+  tolerations:
+    - key: "node-role.kubernetes.io/master"
+      operator: "Equal"
+      effect: "NoSchedule"
+  publishService:
+    enabled: true
+EOT
+  ]
   depends_on = [kind_cluster.default]
 }
 
