@@ -1,4 +1,4 @@
-![454622268-85341846-7997-4a4b-9c67-5254563e36fc](https://github.com/user-attachments/assets/cf54a003-2bc4-4c61-92aa-6a74a28682c5)
+![terrafrom-automation-diagram](https://github.com/user-attachments/assets/2655218f-2030-448d-bb1f-bfdb5959672f)
 
 ## Terraform Provisioner | Kubernetes Model  🚀🚀🚀
 
