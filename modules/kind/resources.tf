@@ -12,6 +12,44 @@ provider "helm" {
   }
 }
 
+
+resource "helm_release" "argocd" {
+  name  = "argocd"
+  repository       = "https://argoproj.github.io/argo-helm"
+  chart            = "argo-cd"
+  namespace        = "argocd"
+  version          = "4.10.0"
+  create_namespace = true
+  timeout = 300
+  values = [
+    <<-EOF
+controller:
+  enableStatefulSet: true
+configs:
+  secret:
+    argocdServerAdminPassword: $2a$10$lgcvwdvggWeLl1AN14NWsePcWQczWHRQH2eiUNL9w/gN6NaelDl.G
+  EOF
+  depends_on = [kind_cluster.default]
+}
+
+resource "null_resource" "wait_for_argocd" {
+  triggers = {
+    key = uuid()
+  }
+
+  provisioner "local-exec" {
+    command = <<EOF
+      printf "\nWaiting for the argocd controller will be installed...\n"
+      kubectl wait --namespace ${helm_release.argocd.namespace} \
+        --for=condition=ready pod \
+        --selector=app.kubernetes.io/component=server \
+        --timeout=60s
+    EOF
+  }
+  depends_on = [helm_release.argocd]
+}
+
+
 resource "helm_release" "metallb" {
   name             = "metallb"
   repository       = "https://metallb.github.io/metallb"
@@ -27,7 +65,6 @@ resource "helm_release" "metallb" {
     - name: default
       protocol: layer2
       addresses:
-      # - ${cidrhost(data.external.subnet.result.Subnet, 150)}-${cidrhost(data.external.subnet.result.Subnet, 200)}
       - 172.18.255.1-172.18.255.250
   EOF
   ]
@@ -52,6 +89,7 @@ resource "null_resource" "wait_for_metallb" {
   }
   depends_on = [helm_release.metallb]
 }
+
 
 resource "helm_release" "ingress_nginx" {
   name       = "ingress-nginx"
