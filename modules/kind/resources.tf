@@ -21,14 +21,17 @@ resource "helm_release" "argocd" {
   version          = "4.10.0"
   create_namespace = true
   timeout = 300
+
   values = [
-    <<-EOF
+    <<EOT
 controller:
   enableStatefulSet: true
+
 configs:
   secret:
     argocdServerAdminPassword: $2a$10$lgcvwdvggWeLl1AN14NWsePcWQczWHRQH2eiUNL9w/gN6NaelDl.G
-  EOF
+   EOT
+  ]
   depends_on = [kind_cluster.default]
 }
 
@@ -48,7 +51,6 @@ resource "null_resource" "wait_for_argocd" {
   }
   depends_on = [helm_release.argocd]
 }
-
 
 resource "helm_release" "metallb" {
   name             = "metallb"
