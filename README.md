@@ -1,4 +1,4 @@
-![457136247-df110738-aad8-487d-a479-0c3d8e6483a3](https://github.com/user-attachments/assets/f7e098ae-c919-43b5-b40d-3d7275e3b044)
+<img width="1246" height="495" alt="image" src="https://github.com/user-attachments/assets/eece31a7-e5fc-4b59-bc0f-b0a6292e5142" />
 
 ## Terraform Provisioner | Kubernetes Model  🚀🚀🚀
 
