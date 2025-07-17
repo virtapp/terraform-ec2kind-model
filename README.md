@@ -1,4 +1,4 @@
-<img width="1246" height="600" alt="image" src="https://github.com/user-attachments/assets/3fff1f99-b9cd-4dee-8865-6fdd65e1f355" />
+<img width="1246" height="600" alt="image" src="https://github.com/user-attachments/assets/3b14f2f2-eb7a-4f2c-81e9-863e920cd535" />
 
 
 ## Terraform Provisioner | AWS Kubernetes Kind  🚀🚀🚀
